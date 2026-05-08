@@ -7,7 +7,30 @@ const path = require('path');
 const { initDatabase } = require('./database/init');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
+// ─── Lazy DB init (works for both serverless & normal server) ───────────────
+let _dbReady = false;
+let _dbPromise = null;
+
+function ensureDb() {
+  if (_dbReady) return Promise.resolve();
+  if (!_dbPromise) {
+    _dbPromise = initDatabase()
+      .then(() => { _dbReady = true; })
+      .catch(err => { _dbPromise = null; throw err; });
+  }
+  return _dbPromise;
+}
+
+app.use(async (req, res, next) => {
+  try {
+    await ensureDb();
+    next();
+  } catch (err) {
+    console.error('DB init failed:', err.message);
+    res.status(500).json({ error: 'Database connection failed.' });
+  }
+});
 
 // Security headers
 app.use(helmet({
@@ -37,7 +60,7 @@ const loginLimiter = rateLimit({
   legacyHeaders: false
 });
 
-// Static files (public folder only — uploads now on Cloudinary)
+// Static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
@@ -66,21 +89,26 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
 });
 
-// Boot — init DB first, then start server
-(async () => {
-  try {
-    console.log('🗄️  Connecting to Turso database...');
-    await initDatabase();
-    console.log('✅ Database ready.\n');
+// ─── Export for Vercel serverless ───────────────────────────────────────────
+module.exports = app;
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Portfolio server running at http://localhost:${PORT}`);
-      console.log(`🔐 Admin panel: http://localhost:${PORT}/manage-portfolio`);
-      console.log(`☁️  Storage: Cloudinary (cloud)`);
-      console.log(`🗃️  Database: Turso (cloud SQLite)\n`);
-    });
-  } catch (err) {
-    console.error('❌ Failed to start server:', err.message);
-    process.exit(1);
-  }
-})();
+// ─── Local development (node server.js) ─────────────────────────────────────
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  (async () => {
+    try {
+      console.log('🗄️  Connecting to Turso database...');
+      await initDatabase();
+      console.log('✅ Database ready.\n');
+      app.listen(PORT, () => {
+        console.log(`🚀 Portfolio server running at http://localhost:${PORT}`);
+        console.log(`🔐 Admin panel: http://localhost:${PORT}/manage-portfolio`);
+        console.log(`☁️  Storage: Cloudinary (cloud)`);
+        console.log(`🗃️  Database: Turso (cloud SQLite)\n`);
+      });
+    } catch (err) {
+      console.error('❌ Failed to start server:', err.message);
+      process.exit(1);
+    }
+  })();
+}
