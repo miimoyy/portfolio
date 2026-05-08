@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio Rully Al Islami Muttaqin — Network & Server Enthusiast">
+
+  <!-- === FITUR 5: OG / Twitter Meta Tags === -->
+  <meta property="og:title" content="Portfolio - Rully Al Islami Muttaqin">
+  <meta property="og:description" content="Network & Server Enthusiast | MikroTik, Linux, Docker">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+
+  <!-- === FITUR 4: Favicon SVG inline (inisial "R") === -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231a2744'/><text x='16' y='23' text-anchor='middle' font-family='Inter,Arial,sans-serif' font-size='20' font-weight='800' fill='white'>R</text></svg>">
+
+  <title>Portfolio - Rully Al Islami Muttaqin</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo"><span>&lt;</span>Portfolio<span>/&gt;</span></a>
+      <!-- === FITUR 1 & 3: Tambah link Skills & Kontak di navbar === -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certificates">Sertifikat</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="700">
+      <div class="hero-avatar">
+        <img src="/assets/default-avatar.svg" alt="Foto Profil" id="heroPhoto">
+      </div>
+      <h1 id="heroName">Rully Al Islami Muttaqin</h1>
+      <p class="hero-tagline" id="heroTagline">Network &amp; Server Enthusiast</p>
+
+      <!-- Skill Badges -->
+      <div class="skill-badges" id="skillBadges">
+        <!-- rendered by JS -->
+      </div>
+
+      <!-- === FITUR 2: Hero Social Links === -->
+      <div class="hero-socials" id="heroSocials">
+        <!-- rendered by JS -->
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="quick-stats" id="quickStats">
+        <div class="stat-item">
+          <span class="stat-num" id="statCerts">0</span>
+          <span class="stat-label">Sertifikat</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" id="statYears">2+</span>
+          <span class="stat-label">Tahun Belajar</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" id="statPlatforms">3</span>
+          <span class="stat-label">Platform</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#certificates" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 016.5 2H20v20H6.5a2.5 2.5 0 010-5H20"/></svg>
+          Lihat Sertifikat
+        </a>
+        <a href="#about" class="btn btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          Tentang Saya
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Tentang</span>
+        <h2>Kenali Saya Lebih Dekat</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text" data-aos="fade-right" data-aos-delay="100" id="aboutText">Memuat...</div>
+        <div class="about-info" data-aos="fade-left" data-aos-delay="200">
+          <h3>Data Diri</h3>
+          <div class="info-item">
+            <span class="info-label">Nama</span>
+            <span class="info-value" id="aboutName">-</span>
+          </div>
+          <div class="info-item" id="aboutEduItem">
+            <span class="info-label">Pendidikan</span>
+            <ul class="edu-list" id="aboutEduList"></ul>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Sertifikat</span>
+            <span class="info-value" id="aboutCertCount">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === FITUR 3: SKILLS SECTION === -->
+  <section class="skills-section" id="skills">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Keahlian</span>
+        <h2>Tech Stack &amp; Skills</h2>
+        <p>Teknologi dan tools yang saya kuasai</p>
+      </div>
+      <div class="skills-grid" id="skillsGrid">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- === PROJECTS SECTION === -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Proyek</span>
+        <h2>Projects &amp; Experience</h2>
+        <p>Hal-hal yang pernah saya bangun dan kerjakan</p>
+      </div>
+      <div class="project-grid" id="projectGrid">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section class="certificates" id="certificates">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Pencapaian</span>
+        <h2>Sertifikat &amp; Penghargaan</h2>
+        <p>Koleksi sertifikat dari berbagai platform dan institusi</p>
+      </div>
+      <div class="cert-search-box" data-aos="fade-up" data-aos-delay="100">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Cari sertifikat...">
+      </div>
+      <div class="cert-grid" id="certGrid"></div>
+    </div>
+  </section>
+
+  <!-- === FITUR 1: CONTACT SECTION (sebelum footer) === -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Hubungi Saya</span>
+        <h2>Kontak</h2>
+        <p>Jangan ragu untuk menghubungi saya melalui platform berikut</p>
+      </div>
+      <div class="contact-grid" id="contactGrid" data-aos="fade-up" data-aos-delay="100">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-socials" id="footerSocials"></div>
+      <p class="footer-copy">&copy; <span id="footerYear"></span> <span id="footerName">Portfolio</span>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="/js/main.js"></script>
+</body>
+</html>
